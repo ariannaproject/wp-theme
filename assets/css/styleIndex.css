@@ -1,0 +1,697 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root {
+    --testo: #000000;
+    --bordi: #B8B8B8;
+    --sfondo: #e4e4e4;
+    --secondary: #080808;
+    --accent: #FF7122;
+    --riquadri: white;
+}
+
+@font-face {
+    font-family: outwardBlock;
+    src: url(../fonts/outward-block.ttf);
+}
+
+@font-face {
+    font-family: outwardBorder;
+    src: url(../fonts/outward-borders.ttf);
+}
+
+h1 {
+    font-family: outwardBlock;
+    letter-spacing: 0;
+    font-weight: 400;
+    margin: 0;
+    line-height: 0.85;
+    transform: translateY(5px);
+    color: var(--accent);
+    font-size: 100%;
+}
+
+#title {
+    display: block;
+    margin: 10px;
+    color: var(--accent);
+    height: fit-content;
+    width: calc(50% - 20px);
+}
+
+
+
+h2 {
+    font-family: outwardBorder;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-size: 150px;
+    line-height: 0.85;
+    color: #242425;
+    margin: 0 0 0 10px;
+    color: var(--testo);
+}
+
+h3 {
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0;
+    color: var(--testo);
+}
+
+p {
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    margin: 0;
+    line-height: 1.6;
+    
+}
+
+b {
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+    color: var(--accent);
+    line-height: 1.6;
+}
+
+body {
+    margin: 0;
+    background-color: var(--sfondo);
+    /*background-image:
+        radial-gradient(at 61% 0%, hsla(20, 100%, 56%, 0.2) 0px, transparent 50%),
+        radial-gradient(at 0% 100%, hsla(20, 100%, 56%, 0.2) 0px, transparent 50%);
+    */
+    height: fit-content;
+    width: 100vw;
+    cursor: none;
+    overflow-x: hidden;
+    /*toglie la possibilita' di scrollbar inferiore*/
+}
+
+.righette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100vw - 100px);
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 1;
+    margin: 0 50px 0 50px;
+}
+
+.righettaInterna {
+    position: relative;
+    width: 1px;
+    height: 100%;
+    background-color: var(--bordi);
+    transform: translateX(0);
+}
+
+.cursorDot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--testo);
+    border-radius: 50%;
+    z-index: 11;
+    pointer-events: none;
+    position: fixed;
+}
+
+header {
+    position: relative;
+    width: calc(100vw - 100px);
+    height: calc(100vh - 165px);
+    z-index: 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    padding: 50px;
+    margin-top: 65px;
+}
+
+.scrollContainer {
+    position: absolute;
+    bottom: 0vh;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 0;
+}
+
+.scrollLine {
+    width: 3px;
+    height: 100%;
+    background: var(--bordi);
+    position: relative;
+    overflow: hidden;
+}
+
+.scrollLine::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    animation: scrollAnimation 1.5s linear infinite;
+}
+
+@keyframes scrollAnimation {
+    from {
+        top: -100%;
+    }
+
+    to {
+        top: 100%;
+    }
+}
+
+.subtitleContainer {
+    position: relative;
+    width: 25%;
+    height: 100%;
+    display: flex;
+}
+
+.subtitle {
+    position: sticky;
+    top: 115px;
+    width: calc(100% - 20px);
+    height: fit-content;
+    display: flex;
+    padding: 10px;
+}
+
+#container3D {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+#descrizione {
+    position: relative;
+    margin-top: 65px;
+    padding: 50px;
+    height: calc(100vh - 165px - 20px);
+    width: calc(100vw - 100px);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 2;
+    color: var(--testo);
+}
+
+.colonnaTesto {
+   
+    width: 100%;
+    height: 100%;
+    z-index: inherit;
+    columns: 1px;
+    /*le colonne hanno largehzza MINIMA di 1px (in realta' tendono sempre ad essere tanto larghe quanto basta per il gap)*/
+      /*"calc" Ã¨ necessario*/ 
+    column-count: 2;
+    column-gap: 50%;
+    column-fill: auto;
+}
+
+.colonnaTesto br {
+    height: 20px;
+}
+
+.colonnaTesto h3 {
+    padding: 0 10px 0 10px;
+}
+
+.colonnaTesto p {
+    padding: 0 10px 0 10px;
+}
+
+.menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 65px;
+    width: calc(100vw - 100px);
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding: 0 50px 0 50px;
+    margin: 0;
+    z-index: 10;
+}
+
+.menu span {
+    width: 25%;
+}
+
+.menu .links {
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menuButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: fit-content;
+    height: fit-content;
+    align-items: center;
+}
+
+.links .linksText {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    width: fit-content;
+    height: fit-content;
+
+}
+
+ul.menuContainer {
+    list-style-type: none;
+}
+
+a {
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.6;
+    text-decoration: none;
+    cursor: none;
+    color: var(--testo);
+    transition: all 0.3s ease-in-out;
+}
+
+.tornaIndietro {
+    width: fit-content;
+    text-wrap: nowrap;
+    width: 25%;
+}
+
+.tornaIndietro a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+}
+
+.menuMobile {
+    /*sfondo che fa da base anche per quello desktop*/
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 65px;
+    background-color: var(--sfondo);
+    transition: all 0.4s ease-out;
+    z-index: 9;
+    border-bottom: solid 1px var(--bordi);
+}
+
+.linkMobileContainer li {
+    display: none;
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 5px 10px 5px 10px;
+    margin: 0;
+    width: fit-content;
+    height: fit-content;
+    cursor: none;
+    border-style: solid;
+    border-radius: 0;
+    border-width: 1px;
+    border-color: var(--accent);
+    background-color: var(--accent);
+    color: var(--testo);
+    transition: 0.3s ease;
+
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+button:hover {
+    background-color: var(--sfondo);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.fontCredit {
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    margin: 0;
+    color: #000000;
+    line-height: 1.6;
+    width: fit-content;
+    position: absolute;
+    bottom: 5px;
+    left: 60px;
+}
+
+.carousel {
+    position: relative;
+    width: calc(100vw - 100px);
+    margin: 0 49px 0 49px;
+    height: 500px;
+    display: flex;
+    z-index: 5;
+    overflow: hidden;
+    /*ciaoooo*/
+}
+
+.cardGroup:hover {
+    animation-play-state: paused;
+}
+
+.cardGroup {
+    display: flex;
+    padding-right: 10px;
+    gap: 10px;
+    will-change: transform;
+    animation: scrolling 60s linear infinite;
+    z-index: inherit;
+}
+
+.card {
+    width: 330px;
+    height: calc(100% - 2px);
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--bordi);
+    background-color: var(--riquadri);
+    display: flex;
+    flex-direction: column;
+}
+
+.cardImage {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: var(--bordi);
+}
+
+.cardContent {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: var(--sfondo);
+}
+
+.cardText {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    color: black;
+    gap: 10px;
+}
+
+footer {
+    position: relative;
+    height: 20px;
+    width: calc(100vw - 120px);
+    padding: 0 60px 0 60px;
+    background-color: var(--sfondo);
+    border-style: solid;
+    border-width: 1px 1px 0px 1px;
+    border-color: var(--bordi);
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    z-index: 9;
+
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    margin: 0;
+    color: var(--testo);
+}
+
+@keyframes scrolling {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@media screen and (max-width: 1200px) {
+
+    /*//////////////////////////////////////////////////////*/
+    body {
+        cursor: auto;
+    }
+
+    .cursorDot {
+        display: none;
+    }
+
+    header {
+        padding: 20px 20px 50px 20px;
+        width: calc(100vw - 40px);
+        height: 75vh;
+    }
+
+    #scaricaIlProgetto {
+        display: none;
+    }
+
+    .menu {
+        justify-content: end;
+        padding: 0 20px 0 20px;
+        width: calc(100vw - 40px);
+    }
+
+    .menu .links {
+        display: none;
+    }
+
+    .linkMobileContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 50px;
+    }
+
+    .linkMobileContainer li {
+        display: unset;
+        opacity: 0;
+    }
+
+    .linkMobileContainer a {
+        display: unset;
+        font-family: 'Roboto Mono', sans-serif;
+        font-size: 17px;
+        font-weight: 400;
+        margin: 0;
+        color: var(--testo);
+        line-height: 1.6;
+        text-decoration: none;
+        cursor: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .menuIcon {
+        position: relative;
+        width: 20px;
+        height: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .menuIcon span {
+        display: block;
+        height: 2px;
+        width: 100%;
+        background-color: var(--testo);
+        border-radius: 2px;
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    .menuIcon.active span:nth-child(1) {
+        transform: translateY(4px) rotate(45deg);
+    }
+
+    .menuIcon.active span:nth-child(2) {
+        transform: translateY(-4px) rotate(-45deg);
+    }
+
+    .subtitle {
+        top: 85px;
+    }
+
+    .carousel {
+        width: calc(100vw - 40px);
+        margin: 0 20px 0 20px;
+    }
+
+    .righette {
+        width: calc(100vw - 40px);
+        margin: 0 20px 0 20px;
+    }
+
+    .scrollContainer {
+        display: none;
+    }
+
+    .fontCredit {
+        left: 30px;
+    }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 851px) { /*tablet*/
+    .subtitleContainer {
+        width: 33%;
+    }
+
+    #title {
+        width: calc(66.66666% - 20px);
+    }
+    
+    #descrizione {
+        padding: 20px;
+        width: calc(100vw - 40px);
+        height: calc(100vh - 105px - 20px);
+    }
+
+    .colonnaTesto{
+        column-gap: 33%;
+        column-fill: auto;
+    }
+
+    #righettaTablet{
+        display: none;
+    }
+
+    footer {
+        width: calc(100vw - 60px);
+        height: 20px;
+        justify-content: end;
+        padding: 0 30px 0 30px;
+    }
+}
+@media screen and (max-width: 850px) {
+    /*/////////////////////////////////////////*/
+
+    header {
+        flex-direction: column;
+        padding: 20px;
+        justify-content: start;
+    }
+
+    #title {
+        width: calc(100% - 20px);
+    }
+
+    h1 {
+        overflow: hidden;
+        font-size: 300px;
+    }
+
+    #container3D {
+        display: none;
+    }
+
+    .subtitleContainer {
+        width: 100%;
+        height: 40vh;
+    }
+
+
+    .carousel {
+        height: 450px;
+        width: calc(100vw - 42px);
+        margin: 0 21px 0 21px;
+
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        cursor: grab;
+    }
+
+    .cardGroup {
+        animation: scrolling 120s linear infinite;
+        /* disabilitiamo animazione quando Ã¨ scrollabile */
+        transition: transform 0.3s ease;
+    }
+
+    #descrizione {
+        padding: 20px 20px 20px 20px;
+        height: fit-content;
+        width: calc(100vw - 40px);
+        flex-direction: column;
+    }
+
+    h2 {
+        margin: 0;
+    }
+
+    .colonnaTesto {
+        width: calc(100% - 20px);
+        height: fit-content;
+        padding: 10px;
+        column-count: 1;
+        text-align: top;
+    }
+
+    .colonnaTesto h3 {
+        padding: 0;
+    }
+
+    .colonnaTesto p {
+        padding: 0;
+    }
+
+    .righette {
+        border: solid 1px var(--bordi);
+    }
+
+    .righettaInterna {
+        display: none;
+    }
+
+    footer {
+        width: calc(100vw - 60px);
+        height: 40px;
+        justify-content: start;
+        padding: 0 30px 0 30px;
+    }
+}
