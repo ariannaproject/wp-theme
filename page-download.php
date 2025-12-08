@@ -5,7 +5,7 @@
 <div class="content">
     <header>
         <div class="subtitleContainer">
-            <h2>Community</h2>
+            <h2>Scarica il progetto</h2>
             <p>Arianna è una community in continua espansione, un network composto da scuole, privati e aziende.
                 Ognuno contribuisce alla comunità lavorando a nuovi prototipi e migliorando quelli esisenti. Mandaci
                 i

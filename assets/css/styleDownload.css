@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
-/*1*/
 :root {
     --testo: #000000;
     --bordi: #B8B8B8;
     --grigetto: #E4E4E4;
-    --secondary: #242425ab;
+    --secondary: #242425;
     --accent: #FF7122;
     --riquadri: white;
 }
@@ -25,20 +25,20 @@ h1 {
     letter-spacing: 0;
     font-weight: 400;
     margin: 0;
-    font-size: 300px;
+    font-size: 1000px;
     line-height: 0.85;
     transform: translateY(5px);
 }
 
+
 h2 {
-    font-family: outwardBorder;
+    font-family: 'Anton', sans-serif;
     letter-spacing: 0;
-    font-weight: 400;
-    font-size: 150px;
+    font-weight: 50;
+    font-size: 50px;
     line-height: 0.85;
     margin: 0;
     color: #242425;
-    letter-spacing: 0px;
 }
 
 h3 {
@@ -66,15 +66,6 @@ small {
     line-height: 1.6;
 }
 
-.numeri {
-    position: relative;
-    width: fit-content;
-    height: fit-content;
-    padding-left: 10px;
-    color: transparent;
-    -webkit-text-stroke: 2px var(--secondary);
-}
-
 b {
     font-family: 'Roboto Mono', sans-serif;
     font-size: 15px;
@@ -84,28 +75,13 @@ b {
     line-height: 1.6;
 }
 
-ul {
-    font-family: 'Roboto Mono', sans-serif;
-    font-size: 15px;
-    font-weight: 300;
-    margin: 0;
-    color: var(--testo);
-    line-height: 1.6;
-    padding: 0;
-}
-
-li {
-    margin-left: 20px;
-}
-
 body {
     margin: 0;
     /* Prevent default scrolling */
     background-color: var(--grigetto);
     height: fit-content;
     cursor: none;
-    overflow-x: hidden;
-    /*toglie la possibilita' di scrollbar inferiore*/
+    overflow-x: hidden;  /*toglie la possibilita' di scrollbar inferiore*/
 }
 
 .righette {
@@ -126,9 +102,7 @@ body {
     width: 1px;
     height: 100%;
     background-color: var(--bordi);
-    transform: translateX(0px);
 }
-
 
 .cursorDot {
     width: 10px;
@@ -156,7 +130,7 @@ body {
     z-index: 10;
 }
 
-.menu span {
+.menu span{
     width: 25%;
 }
 
@@ -236,7 +210,6 @@ a {
 
 a:hover {
     color: var(--accent);
-    cursor: none;
 }
 
 button {
@@ -255,6 +228,11 @@ button {
     border-color: var(--accent);
     background-color: var(--accent);
     transition: 0.3s ease;
+
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--testo);
 }
 
 button:hover {
@@ -263,22 +241,17 @@ button:hover {
     color: var(--accent);
 }
 
-button a {
-    color: currentColor;
-}
-
-/*///////////////////////////////////////////////uguale per tutti///////////////////////////*/
-
 .content {
     position: relative;
     width: calc(100vw - 100px);
-    height: fit-content;
+    height: calc(100vh - 165px - 21px);
     z-index: 3;
     display: flex;
     flex-direction: column;
     align-items: start;
     padding: 50px;
     margin-top: 65px;
+    align-items: center;
     gap: 50px;
 }
 
@@ -296,7 +269,7 @@ header span {
 .subtitleContainer {
     position: relative;
     padding: 10px;
-    width: calc(25% - 20px);
+    width: calc(50% - 20px);
     height: fit-content;
     display: flex;
     flex-direction: column;
@@ -307,71 +280,84 @@ header span {
     position: relative;
     width: 50%;
     height: fit-content;
-    z-index: 3;
-}
-
-.player iframe{
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border: none;
-}
-
-.righe {
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-}
-
-.colonne span {
-    width: 100%;
-    height: fit-content;
-    opacity: 0;
-    display: flex;
-}
-
-.colonne {
-    width: 100%;
-    height: fit-content;
-    display: flex;
-    flex-direction: row;
-}
-
-.colonna {
-    position: relative;
-    width: 100%;
-    height: fit-content;
     display: flex;
     flex-direction: column;
 }
 
-.descrizionePasso {
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-    width: calc(100% - 20px);
-    padding: 10px;
+.group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
+    width: 75%;
+    height: 500px;
 }
 
-.immagine {
-    width: 100%;
-    height: 400px;
-    background-image: cover;
+.card{
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    border: 1px solid var(--bordi);
+    background-color: #E4E4E4;
+    padding: 10px;
+    transition: all 0.3s ease;
+    color: var(--testo);
 }
 
-.immagine img {
+.card:hover{
+    background-color: var(--riquadri);
+    color: var(--accent);
+}
+
+.card h3{
+    color: inherit;
+}
+
+.cardImage{
+    
+    width: calc(100% - 40px);
+    height: calc(60% - 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.cardImage #meccanicaImage{
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    background-image: url("meccanicaImage.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.testo {
-    padding: 10px;
-    width: calc(100% - 20px);
-    background-color: var(--riquadri);
+.cardImage #softwareImage{
+    width: 100%;
+    height: 100%;
+    background-image: url("softwareImage.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-footer {
+.cardImage #elettronicaImage{
+    width: 100%;
+    height: 100%;
+    background-image: url("elettronicaImage.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cardContent {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+footer{
     position: relative;
     height: 20px;
     width: calc(100vw - 120px);
@@ -399,7 +385,6 @@ footer {
     }
 }
 
-
 @media screen and (max-width: 1200px) {
     /*///////////////////////////////////*/
 
@@ -408,6 +393,15 @@ footer {
     }
 
     .cursorDot {
+        display: none;
+    }
+
+    h1 {
+        width: 75%;
+        font-size: 200px;
+    }
+
+    button {
         display: none;
     }
 
@@ -426,6 +420,11 @@ footer {
         padding: 50px;
     }
 
+    .linkMobileContainer li {
+        display: unset;
+        opacity: 0;
+    }
+
     .linkMobileContainer a {
         display: unset;
         font-family: 'Roboto Mono', sans-serif;
@@ -433,7 +432,6 @@ footer {
         font-weight: 400;
         margin: 0;
         color: var(--testo);
-        opacity: 0;
         line-height: 1.6;
         text-decoration: none;
         cursor: none;
@@ -467,17 +465,12 @@ footer {
     .menuIcon.active span:nth-child(2) {
         transform: translateY(-4px) rotate(-45deg);
     }
-
-    .group {
-        grid-template-columns: repeat(4, 1fr);
-    }
 }
 
 
 
 @media screen and (max-width: 1200px) and (min-width: 851px) {
-    /*tablet///////////////////////////////////*/
-
+    /*///////////////////////////////////*/
 
     .menu {
         justify-content: end;
@@ -488,12 +481,15 @@ footer {
 }
 
 @media screen and (max-width: 850px) {
-    /*telefono///////////////////////////////////*/
+
+    body {
+        width: 100vw;
+    }
 
     .menu {
         justify-content: end;
         padding: 0 20px 0 20px;
-        width: calc(100vw - 40px);
+        width: calc(100vw - 38px);
     }
 
     header {
@@ -502,18 +498,10 @@ footer {
         gap: 20px;
     }
 
-    header span {
-        display: none;
-    }
-
-    h1 {
-        -webkit-text-stroke-color: var(--bordi);
-    }
-
     .content {
         width: calc(100vw - 40px);
         gap: 50px;
-        padding: 20px 20px 0 20px;
+        padding: 20px;
         height: fit-content;
         flex-direction: column;
     }
@@ -524,22 +512,6 @@ footer {
 
     .player {
         width: 100%;
-    }
-
-    .colonne {
-        flex-direction: column;
-        ;
-    }
-
-    .colonna {
-        width: 100%;
-        height: fit-content;
-        align-items: center;
-        gap: 0;
-    }
-
-    .numeri {
-        padding-left: 0;
     }
 
     .righette {
@@ -553,8 +525,19 @@ footer {
         display: none;
     }
 
-    .colonne span {
-        display: none;
+    .group {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 10px;
+        height: fit-content;
+        width: calc(100% -  20px);
+        padding: 0 10px 0 10px;
+    }
+
+    .card{
+        width: calc(100% - 20px);
+        height: 300px;
     }
 
     footer {

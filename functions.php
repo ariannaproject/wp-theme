@@ -60,10 +60,6 @@ function arianna_register_styles() {
         wp_enqueue_style('arianna-gallery-page-style', get_template_directory_uri() . '/assets/css/styleGallery.css', array(), $version, 'all');
     }
 
-    if(is_page('community')) {
-        wp_enqueue_style('arianna-community-page-style', get_template_directory_uri() . '/assets/css/styleCommunity.css', array(), $version, 'all');
-    }
-
     if(is_page('news')) {
         wp_enqueue_style('arianna-news-page-style', get_template_directory_uri() . '/assets/css/styleAggiornamenti.css', array(), $version, 'all');
     }
