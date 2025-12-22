@@ -1,0 +1,1241 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+/* ===================================
+   VARIABILI GLOBALI
+   =================================== */
+:root {
+    --testo: #000000;
+    --bordi: #B8B8B8;
+    --grigetto: #E4E4E4;
+    --sfondo: #e4e4e4;
+    --secondary: #242425;
+    --secondary-alpha: #242425ab;
+    --accent: #FF7122;
+    --riquadri: white;
+}
+
+/* ===================================
+   FONT FACES
+   =================================== */
+@font-face {
+    font-family: outwardBlock;
+    src: url(../fonts/outward-block.ttf);
+}
+
+@font-face {
+    font-family: outwardBorder;
+    src: url(../fonts/outward-borders.ttf);
+}
+
+/* ===================================
+   TIPOGRAFIA BASE
+   =================================== */
+h1 {
+    font-family: outwardBlock;
+    letter-spacing: 0;
+    font-weight: 400;
+    margin: 0;
+    font-size: 1000px;
+    line-height: 0.85;
+    transform: translateY(5px);
+}
+
+h2 {
+    font-family: outwardBorder;
+    letter-spacing: 0;
+    font-weight: 400;
+    font-size: 150px;
+    line-height: 0.85;
+    margin: 0;
+    color: #242425;
+}
+
+h3 {
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0;
+}
+
+p {
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    margin: 0;
+    color: var(--testo);
+    line-height: 1.6;
+}
+
+small {
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    margin: 0;
+    color: var(--testo);
+    line-height: 1.6;
+}
+
+b {
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+    color: var(--accent);
+    line-height: 1.6;
+}
+
+ul {
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    margin: 0;
+    color: var(--testo);
+    line-height: 1.6;
+    padding: 0;
+}
+
+li {
+    margin-left: 20px;
+}
+
+/* ===================================
+   BODY E LAYOUT BASE
+   =================================== */
+body {
+    margin: 0;
+    background-color: var(--grigetto);
+    height: fit-content;
+    cursor: none;
+    overflow-x: hidden;
+}
+
+/* ===================================
+   ELEMENTI COMUNI - RIGHETTE E CURSORE
+   =================================== */
+.righette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: calc(100vw - 100px);
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 1;
+    margin: 0 50px 0 50px;
+}
+
+.righettaInterna {
+    position: relative;
+    width: 1px;
+    height: 100%;
+    background-color: var(--bordi);
+}
+
+.cursorDot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--testo);
+    border-radius: 50%;
+    z-index: 11;
+    pointer-events: none;
+    position: fixed;
+}
+
+/* ===================================
+   MENU E NAVIGAZIONE
+   =================================== */
+.menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 65px;
+    width: calc(100vw - 100px);
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    padding: 0 50px 0 50px;
+    margin: 0;
+    z-index: 10;
+}
+
+.menu span {
+    width: 25%;
+}
+
+.menu .links {
+    width: 75%;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.links .linksText {
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    width: fit-content;
+    height: fit-content;
+}
+
+.tornaIndietro {
+    width: fit-content;
+    text-wrap: nowrap;
+    width: 25%;
+}
+
+.tornaIndietro a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: fit-content;
+}
+
+.menuMobile {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 65px;
+    background-color: var(--grigetto);
+    transition: all 0.4s ease-out;
+    z-index: 9;
+    border-bottom: solid 1px var(--bordi);
+}
+
+.linkMobileContainer a {
+    display: none;
+}
+
+.menuIcon {
+    position: relative;
+    width: 20px;
+    height: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.menuIcon span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: var(--testo);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menuIcon.active span:nth-child(1) {
+    transform: translateY(4px) rotate(45deg);
+}
+
+.menuIcon.active span:nth-child(2) {
+    transform: translateY(-4px) rotate(-45deg);
+}
+
+/* ===================================
+   LINKS E BUTTON
+   =================================== */
+a {
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.6;
+    text-decoration: none;
+    cursor: none;
+    color: var(--testo);
+    transition: all 0.2s ease-in-out;
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    padding: 5px 10px 5px 10px;
+    margin: 0;
+    width: fit-content;
+    height: fit-content;
+    cursor: none;
+    border-style: solid;
+    border-radius: 0;
+    border-width: 1px;
+    border-color: var(--accent);
+    background-color: var(--accent);
+    transition: 0.3s ease;
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--testo);
+}
+
+button:hover {
+    background-color: var(--grigetto);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+button a {
+    color: currentColor;
+}
+
+/* ===================================
+   FOOTER
+   =================================== */
+footer {
+    position: relative;
+    height: 20px;
+    width: calc(100vw - 120px);
+    padding: 0 60px 0 60px;
+    background-color: var(--grigetto);
+    border-style: solid;
+    border-width: 1px 1px 0px 1px;
+    border-color: var(--bordi);
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    z-index: 9;
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    margin: 0;
+    color: #000000;
+}
+
+/* ===================================
+   CONTENT - VARIANTI PER PAGINA
+   =================================== */
+
+/* Content generico - usato in Aggiornamenti, Galleria, ScaricaIlProgetto */
+.content {
+    position: relative;
+    width: calc(100vw - 100px);
+    height: fit-content;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 50px;
+    margin-top: 65px;
+    gap: 50px;
+}
+
+.content span {
+    display: block;
+    height: 20px;
+    width: 25%;
+}
+
+/* Content per Community - SOVRAPPOSIZIONE RISOLTA */
+.content-community {
+    position: relative;
+    width: calc(100vw - 100px);
+    height: calc(100vh - 165px - 21px);
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    margin-top: 65px;
+    gap: 50px;
+}
+
+/* ===================================
+   HEADER - VARIANTI PER PAGINA
+   =================================== */
+
+/* Header generico - Galleria, Community, ScaricaIlProgetto */
+.header-standard {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    width: 100%;
+}
+
+.header-standard span {
+    width: 25%;
+}
+
+/* Header per Aggiornamenti - SOVRAPPOSIZIONE RISOLTA */
+.header-aggiornamenti {
+    position: fixed;
+    top: 115px;
+    left: 50px;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: calc((100% - 100px)/4);
+}
+
+/* Header per Index - SOVRAPPOSIZIONE RISOLTA */
+.header-index {
+    position: relative;
+    width: calc(100vw - 100px);
+    height: calc(100vh - 165px);
+    z-index: 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    padding: 50px;
+    margin-top: 65px;
+}
+
+/* ===================================
+   SUBTITLE CONTAINER - VARIANTI
+   =================================== */
+
+/* Subtitle per Aggiornamenti */
+.subtitleContainer {
+    position: relative;
+    padding: 10px;
+    width: calc(100% - 20px);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Subtitle per Community - SOVRAPPOSIZIONE RISOLTA */
+.subtitleContainer-community {
+    position: relative;
+    padding: 10px;
+    width: calc(50% - 20px);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Subtitle per Galleria - SOVRAPPOSIZIONE RISOLTA */
+.subtitleContainer-galleria {
+    position: relative;
+    padding: 10px;
+    width: calc(25% - 20px);
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Subtitle per Index - SOVRAPPOSIZIONE RISOLTA */
+.subtitleContainer-index {
+    position: relative;
+    width: 25%;
+    height: 100%;
+    display: flex;
+}
+
+.subtitle {
+    position: sticky;
+    top: 115px;
+    width: calc(100% - 20px);
+    height: fit-content;
+    display: flex;
+    padding: 10px;
+}
+
+/* ===================================
+   PLAYER (per Galleria e Community)
+   =================================== */
+.player {
+    position: relative;
+    width: 50%;
+    height: fit-content;
+    z-index: 3;
+}
+
+.player iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+}
+
+/* ===================================
+   ELEMENTI SPECIFICI - INDEX
+   =================================== */
+#title {
+    display: block;
+    margin: 10px;
+    color: var(--accent);
+    height: fit-content;
+    width: calc(50% - 20px);
+}
+
+h1 {
+    color: var(--accent);
+}
+
+#container3D {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+#descrizione {
+    position: relative;
+    margin-top: 65px;
+    padding: 50px;
+    height: calc(100vh - 165px - 20px);
+    width: calc(100vw - 100px);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    z-index: 2;
+    color: var(--testo);
+}
+
+.colonnaTesto {
+    width: 100%;
+    height: 100%;
+    z-index: inherit;
+    columns: 1px;
+    column-count: 2;
+    column-gap: 50%;
+    column-fill: auto;
+}
+
+.colonnaTesto br {
+    height: 20px;
+}
+
+.colonnaTesto h3 {
+    padding: 0 10px 0 10px;
+}
+
+.colonnaTesto p {
+    padding: 0 10px 0 10px;
+}
+
+.scrollContainer {
+    position: absolute;
+    bottom: 0vh;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 0;
+}
+
+.scrollLine {
+    width: 3px;
+    height: 100%;
+    background: var(--bordi);
+    position: relative;
+    overflow: hidden;
+}
+
+.scrollLine::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    animation: scrollAnimation 1.5s linear infinite;
+}
+
+@keyframes scrollAnimation {
+    from {
+        top: -100%;
+    }
+    to {
+        top: 100%;
+    }
+}
+
+.fontCredit {
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 10px;
+    font-weight: 300;
+    margin: 0;
+    color: #000000;
+    line-height: 1.6;
+    width: fit-content;
+    position: absolute;
+    bottom: 5px;
+    left: 60px;
+}
+
+/* Carousel per Index */
+.carousel {
+    position: relative;
+    width: calc(100vw - 100px);
+    margin: 0 49px 0 49px;
+    height: 500px;
+    display: flex;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.cardGroup:hover {
+    animation-play-state: paused;
+}
+
+.cardGroup {
+    display: flex;
+    padding-right: 10px;
+    gap: 10px;
+    will-change: transform;
+    animation: scrolling 60s linear infinite;
+    z-index: inherit;
+}
+
+@keyframes scrolling {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* ===================================
+   CARD STYLES
+   =================================== */
+
+/* Card per Index - SOVRAPPOSIZIONE RISOLTA */
+.card-index {
+    width: 330px;
+    height: calc(100% - 2px);
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--bordi);
+    background-color: var(--riquadri);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Card per Community - SOVRAPPOSIZIONE RISOLTA */
+.card-community {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - 20px);
+    height: calc(100% - 20px);
+    border: 1px solid var(--bordi);
+    background-color: #E4E4E4;
+    padding: 10px;
+    transition: all 0.3s ease;
+    color: var(--testo);
+}
+
+.card-community:hover {
+    background-color: var(--riquadri);
+    color: var(--accent);
+}
+
+.card-community h3 {
+    color: inherit;
+}
+
+.cardImage {
+    position: relative;
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+    border-color: var(--bordi);
+}
+
+/* CardImage per Community - SOVRAPPOSIZIONE RISOLTA */
+.cardImage-community {
+    width: calc(100% - 40px);
+    height: calc(60% - 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.cardImage-community #meccanicaImage {
+    width: 100%;
+    height: 100%;
+    background-image: url("meccanicaImage.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cardImage-community #softwareImage {
+    width: 100%;
+    height: 100%;
+    background-image: url("softwareImage.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cardImage-community #elettronicaImage {
+    width: 100%;
+    height: 100%;
+    background-image: url("elettronicaImage.svg");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.cardContent {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: var(--sfondo);
+}
+
+/* CardContent per Community - SOVRAPPOSIZIONE RISOLTA */
+.cardContent-community {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cardText {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    color: black;
+    gap: 10px;
+}
+
+/* ===================================
+   ELEMENTI SPECIFICI - COMMUNITY
+   =================================== */
+.group {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    width: 75%;
+    height: 500px;
+}
+
+/* ===================================
+   ELEMENTI SPECIFICI - GALLERIA
+   =================================== */
+
+/* Group per Galleria - SOVRAPPOSIZIONE RISOLTA */
+.group-galleria {
+    width: calc(100% - 20px);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 0 10px 0 10px;
+    grid-auto-flow: dense;
+}
+
+.portrate {
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    z-index: 10;
+    grid-column: span 1;
+}
+
+.landscape {
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    background-position: center;
+    z-index: 10;
+    grid-column: span 2;
+}
+
+/* ===================================
+   ELEMENTI SPECIFICI - AGGIORNAMENTI
+   =================================== */
+.colonne {
+    position: relative;
+    width: 75%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.date {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.sinistra {
+    width: calc(33.333333333% + 1px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dataETitolo {
+    position: sticky;
+    top: 115px;
+    padding: 10px;
+    width: calc(100% - 20px);
+}
+
+.dataETitolo span {
+    display: block;
+    height: 20px;
+    width: 100%;
+}
+
+.destra {
+    width: calc(66.666666666% - 2px);
+    width: 2fr;
+    display: flex;
+    flex-direction: column;
+}
+
+.immagine {
+    width: 100%;
+    height: 400px;
+    background-image: cover;
+}
+
+.immagine img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.testo {
+    padding: 10px;
+    width: calc(100% - 20px);
+    background-color: var(--riquadri);
+    border-width: 1px 0 1px 0;
+    border-style: solid;
+    border-color: var(--bordi);
+}
+
+/* ===================================
+   ELEMENTI SPECIFICI - SCARICA IL PROGETTO
+   =================================== */
+.numeri {
+    position: relative;
+    width: fit-content;
+    height: fit-content;
+    padding-left: 10px;
+    color: transparent;
+    -webkit-text-stroke: 2px var(--secondary);
+}
+
+.righe {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+}
+
+/* Colonne per ScaricaIlProgetto - SOVRAPPOSIZIONE RISOLTA */
+.colonne-progetto {
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+}
+
+.colonne-progetto span {
+    width: 100%;
+    height: fit-content;
+    opacity: 0;
+    display: flex;
+}
+
+.colonna {
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+}
+
+.descrizionePasso {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: calc(100% - 20px);
+    padding: 10px;
+    gap: 20px;
+}
+
+/* ===================================
+   MEDIA QUERIES - 1500px
+   =================================== */
+@media screen and (max-width: 1500px) {
+    .content,
+    .content-community {
+        height: fit-content;
+    }
+}
+
+/* ===================================
+   MEDIA QUERIES - 1200px
+   =================================== */
+@media screen and (max-width: 1200px) {
+    body {
+        cursor: auto;
+    }
+
+    .cursorDot {
+        display: none;
+    }
+
+    h1 {
+        width: 75%;
+        font-size: 200px;
+    }
+
+    button {
+        display: none;
+    }
+
+    .menu .links {
+        display: none;
+    }
+
+    .tornaIndietro {
+        display: none;
+    }
+
+    .linkMobileContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 50px;
+    }
+
+    .linkMobileContainer li {
+        display: unset;
+        font-family: 'Roboto Mono', sans-serif;
+        font-size: 17px;
+        font-weight: 400;
+        margin: 0;
+        color: var(--testo);
+        opacity: 0;
+        line-height: 1.6;
+        text-decoration: none;
+        cursor: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Content generico */
+    .content {
+        width: calc(100vw - 100px);
+        gap: 50px;
+        padding: 50px;
+        height: fit-content;
+        flex-direction: column;
+    }
+
+    .content span {
+        display: none;
+    }
+
+    .colonne {
+        width: 100%;
+        height: fit-content;
+    }
+
+    /* Galleria group */
+    .group-galleria {
+        grid-template-columns: 1fr 1fr;
+        padding: 0;
+    }
+
+    .portrate {
+        grid-column: span 2;
+        aspect-ratio: 1 / 1;
+    }
+
+    /* Index specifici */
+    .header-index {
+        padding: 20px 20px 50px 20px;
+        width: calc(100vw - 40px);
+        height: 75vh;
+    }
+
+    #scaricaIlProgetto {
+        display: none;
+    }
+
+    .menu {
+        justify-content: end;
+        padding: 0 20px 0 20px;
+        width: calc(100vw - 40px);
+    }
+
+    .subtitle {
+        top: 85px;
+    }
+
+    .carousel {
+        width: calc(100vw - 40px);
+        margin: 0 20px 0 20px;
+    }
+
+    .righette {
+        width: calc(100vw - 40px);
+        margin: 0 20px 0 20px;
+    }
+
+    .scrollContainer {
+        display: none;
+    }
+
+    .fontCredit {
+        left: 30px;
+    }
+}
+
+/* ===================================
+   MEDIA QUERIES - 1200px to 851px (TABLET)
+   =================================== */
+@media screen and (max-width: 1200px) and (min-width: 851px) {
+    .menu {
+        justify-content: end;
+        padding: 0 50px 0 50px;
+        width: calc(100vw - 100px);
+    }
+
+    #righettaTablet {
+        display: none;
+    }
+
+    /* Aggiornamenti header */
+    .header-aggiornamenti {
+        width: 66.6666666%;
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    /* Index specifici */
+    .subtitleContainer-index {
+        width: 33%;
+    }
+
+    #title {
+        width: calc(66.66666% - 20px);
+    }
+
+    #descrizione {
+        padding: 20px;
+        width: calc(100vw - 40px);
+        height: calc(100vh - 105px - 20px);
+    }
+
+    .colonnaTesto {
+        column-gap: 33%;
+        column-fill: auto;
+    }
+
+    footer {
+        width: calc(100vw - 60px);
+        height: 20px;
+        justify-content: end;
+        padding: 0 30px 0 30px;
+    }
+}
+
+/* ===================================
+   MEDIA QUERIES - 850px (MOBILE)
+   =================================== */
+@media screen and (max-width: 850px) {
+    body {
+        width: 100vw;
+    }
+
+    .menu {
+        justify-content: end;
+        padding: 0 20px 0 20px;
+        width: calc(100vw - 38px);
+    }
+
+    /* Header standard */
+    .header-standard {
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .header-standard span {
+        display: none;
+    }
+
+    /* Header aggiornamenti */
+    .header-aggiornamenti {
+        width: 100%;
+        position: relative;
+        top: 0;
+        left: 0;
+    }
+
+    /* Header index */
+    .header-index {
+        flex-direction: column;
+        padding: 20px;
+        justify-content: start;
+    }
+
+    #title {
+        width: calc(100% - 20px);
+    }
+
+    h1 {
+        overflow: hidden;
+        font-size: 300px;
+        -webkit-text-stroke-color: var(--bordi);
+    }
+
+    #container3D {
+        display: none;
+    }
+
+    .subtitleContainer-index {
+        width: 100%;
+        height: 40vh;
+    }
+
+    /* Content generico */
+    .content {
+        width: calc(100vw - 40px);
+        gap: 50px;
+        padding: 20px;
+        height: fit-content;
+        flex-direction: column;
+    }
+
+    /* Content community */
+    .content-community {
+        width: calc(100vw - 40px);
+        gap: 50px;
+        padding: 20px;
+        height: fit-content;
+        flex-direction: column;
+    }
+
+    /* Subtitle containers */
+    .subtitleContainer,
+    .subtitleContainer-community,
+    .subtitleContainer-galleria {
+        width: calc(100% - 20px);
+    }
+
+    .player {
+        width: 100%;
+    }
+
+    .righette {
+        width: calc(100vw - 40px);
+        margin: 0 20px 0 20px;
+        border: solid 1px var(--bordi);
+    }
+
+    .righettaInterna {
+        display: none;
+    }
+
+    /* Community group */
+    .group {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 10px;
+        height: fit-content;
+        width: calc(100% - 20px);
+        padding: 0 10px 0 10px;
+    }
+
+    .card-community {
+        width: calc(100% - 20px);
+        height: 300px;
+    }
+
+    /* Index carousel */
+    .carousel {
+        height: 450px;
+        width: calc(100vw - 42px);
+        margin: 0 21px 0 21px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        cursor: grab;
+    }
+
+    .cardGroup {
+        animation: scrolling 120s linear infinite;
+        transition: transform 0.3s ease;
+    }
+
+    /* Index descrizione */
+    #descrizione {
+        padding: 20px 20px 20px 20px;
+        height: fit-content;
+        width: calc(100vw - 40px);
+        flex-direction: column;
+    }
+
+    h2 {
+        margin: 0;
+    }
+
+    .colonnaTesto {
+        width: calc(100% - 20px);
+        height: fit-content;
+        padding: 10px;
+        column-count: 1;
+        text-align: top;
+    }
+
+    .colonnaTesto h3 {
+        padding: 0;
+    }
+
+    .colonnaTesto p {
+        padding: 0;
+    }
+
+    /* ScaricaIlProgetto colonne */
+    .colonne-progetto {
+        flex-direction: column;
+    }
+
+    .colonna {
+        width: 100%;
+        height: fit-content;
+        align-items: center;
+        gap: 0;
+    }
+
+    .numeri {
+        padding-left: 0;
+    }
+
+    .colonne-progetto span {
+        display: none;
+    }
+
+    footer {
+        width: calc(100vw - 60px);
+        height: 40px;
+        justify-content: start;
+        padding: 0 30px 0 30px;
+    }
+}

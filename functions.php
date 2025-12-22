@@ -67,6 +67,18 @@ function arianna_register_styles() {
     if(is_page('download')) {
         wp_enqueue_style('arianna-download-page-style', get_template_directory_uri() . '/assets/css/styleDownload.css', array(), $version, 'all');
     }
+
+    if(is_singular('kit')) {
+        wp_enqueue_style('arianna-kit-page-style', get_template_directory_uri() . '/assets/css/styleKit.css', array(), $version, 'all');
+    }
+
+    if(is_post_type_archive('kit')) {
+        wp_enqueue_style('arianna-kit-archive-style', get_template_directory_uri() . '/assets/css/styleKitArchive.css', array(), $version, 'all');
+    }
+
+    if(is_post_type_archive('component')) {
+        wp_enqueue_style('arianna-component-archive-style', get_template_directory_uri() . '/assets/css/styleComponentArchive.css', array(), $version, 'all');
+    }
 }
 
 add_action('wp_enqueue_scripts', 'arianna_register_styles');
@@ -168,6 +180,29 @@ function arianna_create_team_members_post_type() {
     );
 }
 add_action('init', 'arianna_create_team_members_post_type');
+
+
+function arianna_create_component_post_type() {
+    register_post_type('component',
+        array(
+            'labels' => array(
+                'name' => 'Componenti',
+                'singular_name' => 'Componente',
+                'add_new' => 'Aggiungi Componente',
+                'add_new_item' => 'Aggiungi Nuovo Componente',
+                'edit_item' => 'Modifica Componente',
+                'all_items' => 'Componenti'
+            ),
+            'public' => true,
+            'has_archive' => true,
+            'menu_icon' => 'dashicons-archive',
+            'supports' => array('title', 'editor', 'thumbnail'),
+            'show_in_rest' => true, // Per usare l'editor Gutenberg
+            'show_in_menu' => 'arianna-contents',
+        )
+    );
+}
+add_action('init', 'arianna_create_component_post_type');
 
 function arianna_create_gallery_image_post_type() {
     register_post_type('gallery_images',
@@ -433,3 +468,9 @@ function arianna_export_downloads_log_csv() {
     }
 }
 add_action('admin_init', 'arianna_export_downloads_log_csv');
+
+foreach (glob(get_template_directory() . '/inc/*.php') as $file) {
+    require_once $file;
+}
+
+flush_rewrite_rules( false );
