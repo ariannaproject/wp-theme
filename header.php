@@ -44,13 +44,8 @@
           </button>
         <?php endif; ?>
 
-        <?php
-          if(is_user_logged_in()) {
-            echo '<a href="' . get_admin_url() . '">Amministrazione</a>';
-          } else {
-            echo '<a href="' . wp_login_url() . '">Login</a>';
-          }
-        ?>
+        <a href="<?= ARIANNA_BACKEND_URL ?>" class="authenticated" style="display: none;">Amministrazione</a>
+        <a href="<?= arianna_get_login_url_with_redirect() ?>" class="unauthenticated">Login</a>
       </div>
       
     </div>

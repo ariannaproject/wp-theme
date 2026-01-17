@@ -1,5 +1,10 @@
 <?php
 
+// =========== BACKEND URLS ============
+define('ARIANNA_BACKEND_URL', 'http://localhost:8000/');
+define('ARIANNA_API_ME_URL', ARIANNA_BACKEND_URL . 'api/me');
+define('ARIANNA_LOGIN_URL', ARIANNA_BACKEND_URL . 'auth/login');
+
 // =========== THEME SUPPORT ===========
 function arianna_theme_support() {
     // Adds dynamic title tag support
@@ -102,6 +107,8 @@ function arianna_register_scripts() {
         wp_register_script_module('arianna-3d', get_template_directory_uri() . '/assets/js/appIndex.js', array(), $version);
         wp_enqueue_script_module('arianna-3d');
     }
+
+    wp_enqueue_script('arianna-login', get_template_directory_uri() . '/assets/js/appLogin.js', array(), $version, true);
 }
 
 add_action('wp_enqueue_scripts', 'arianna_register_scripts');
@@ -468,6 +475,12 @@ function arianna_export_downloads_log_csv() {
     }
 }
 add_action('admin_init', 'arianna_export_downloads_log_csv');
+
+// 
+function arianna_get_login_url_with_redirect() {
+    global $wp;
+    return ARIANNA_LOGIN_URL . '?redirect_to=' . urlencode(home_url($wp->request));
+}
 
 foreach (glob(get_template_directory() . '/inc/*.php') as $file) {
     require_once $file;
