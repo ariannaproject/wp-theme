@@ -1,7 +1,7 @@
 <?php
 
 // =========== BACKEND URLS ============
-define('ARIANNA_BACKEND_URL', 'http://localhost:8000/');
+define('ARIANNA_BACKEND_URL', 'https://app.arianna.michieletto.it/');
 define('ARIANNA_API_ME_URL', ARIANNA_BACKEND_URL . 'api/me');
 define('ARIANNA_LOGIN_URL', ARIANNA_BACKEND_URL . 'auth/login');
 
@@ -16,25 +16,6 @@ function arianna_theme_support() {
 add_action('after_setup_theme', 'arianna_theme_support');
 
 // =========== THEME INITIALIZATION ===========
-function arianna_create_downloads_table() {
-    global $wpdb;
-    $table_name = $wpdb->prefix . 'downloads_log';
-    $charset_collate = $wpdb->get_charset_collate();
-
-    $sql = "CREATE TABLE IF NOT EXISTS $table_name (
-        id mediumint(9) NOT NULL AUTO_INCREMENT,
-        email varchar(100) NOT NULL,
-        file_name varchar(255) NOT NULL,
-        date datetime DEFAULT CURRENT_TIMESTAMP NOT NULL,
-        PRIMARY KEY (id)
-    ) $charset_collate;";
-
-    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-    dbDelta($sql);
-}
-register_activation_hook(__FILE__, 'arianna_create_downloads_table');
-
-add_action('after_setup_theme', 'arianna_create_downloads_table');
 
 
 // =========== MENUS ===========
@@ -53,16 +34,16 @@ add_action('init', 'arianna_menus');
 function arianna_register_styles() {
     $version = wp_get_theme()->get('Version');
 
+    if(!is_front_page() && !is_404()) {
+        wp_enqueue_style('arianna-main-style', get_template_directory_uri() . '/assets/css/globalStyle.css', array(), $version, 'all');
+    }
+
     if(is_front_page() || is_404()) {
         wp_enqueue_style('arianna-front-page-style', get_template_directory_uri() . '/assets/css/styleIndex.css', array(), $version, 'all');
     }
 
     if(is_page('team')) {
         wp_enqueue_style('arianna-team-page-style', get_template_directory_uri() . '/assets/css/styleTeam.css', array(), $version, 'all');
-    }
-
-    if(is_page('gallery')) {
-        wp_enqueue_style('arianna-gallery-page-style', get_template_directory_uri() . '/assets/css/styleGallery.css', array(), $version, 'all');
     }
 
     if(is_page('news')) {
@@ -73,15 +54,23 @@ function arianna_register_styles() {
         wp_enqueue_style('arianna-download-page-style', get_template_directory_uri() . '/assets/css/styleDownload.css', array(), $version, 'all');
     }
 
-    if(is_singular('kit')) {
+    if(is_singular('kits')) {
         wp_enqueue_style('arianna-kit-page-style', get_template_directory_uri() . '/assets/css/styleKit.css', array(), $version, 'all');
     }
 
-    if(is_post_type_archive('kit')) {
+    if(is_singular('components')) {
+        wp_enqueue_style('arianna-component-page-style', get_template_directory_uri() . '/assets/css/styleComponent.css', array(), $version, 'all');
+    }
+
+    if(is_singular('post')) {
+        wp_enqueue_style('arianna-post-page-style', get_template_directory_uri() . '/assets/css/styleSinglePost.css', array(), $version, 'all');
+    }
+
+    if(is_post_type_archive('kits')) {
         wp_enqueue_style('arianna-kit-archive-style', get_template_directory_uri() . '/assets/css/styleKitArchive.css', array(), $version, 'all');
     }
 
-    if(is_post_type_archive('component')) {
+    if(is_post_type_archive('components')) {
         wp_enqueue_style('arianna-component-archive-style', get_template_directory_uri() . '/assets/css/styleComponentArchive.css', array(), $version, 'all');
     }
 }
@@ -189,105 +178,6 @@ function arianna_create_team_members_post_type() {
 add_action('init', 'arianna_create_team_members_post_type');
 
 
-function arianna_create_component_post_type() {
-    register_post_type('component',
-        array(
-            'labels' => array(
-                'name' => 'Componenti',
-                'singular_name' => 'Componente',
-                'add_new' => 'Aggiungi Componente',
-                'add_new_item' => 'Aggiungi Nuovo Componente',
-                'edit_item' => 'Modifica Componente',
-                'all_items' => 'Componenti'
-            ),
-            'public' => true,
-            'has_archive' => true,
-            'menu_icon' => 'dashicons-archive',
-            'supports' => array('title', 'editor', 'thumbnail'),
-            'show_in_rest' => true, // Per usare l'editor Gutenberg
-            'show_in_menu' => 'arianna-contents',
-        )
-    );
-}
-add_action('init', 'arianna_create_component_post_type');
-
-function arianna_create_gallery_image_post_type() {
-    register_post_type('gallery_images',
-        array(
-            'labels' => array(
-                'name' => 'Immagini della Galleria',
-                'singular_name' => 'Immagine',
-                'add_new' => 'Aggiungi Immagine',
-                'add_new_item' => 'Aggiungi Nuova Immagine',
-                'edit_item' => 'Modifica Immagine',
-                'all_items' => 'Immagini della Galleria'
-            ),
-            'public' => true,
-            'has_archive' => false,
-            'menu_icon' => 'dashicons-format-image',
-            'supports' => array('title', 'thumbnail'),
-            'show_in_rest' => true, // Per usare l'editor Gutenberg
-            'show_in_menu' => 'arianna-contents',
-        )
-    );
-}
-add_action('init', 'arianna_create_gallery_image_post_type');
-
-// Aggiungi il meta box
-function arianna_add_gallery_image_meta_post() {
-    add_meta_box(
-        'image_orientation',
-        'Orientamento Immagine',
-        'arianna_show_image_orientation_metabox',
-        'gallery_images',
-        'side',
-        'low'
-    );
-}
-add_action('add_meta_boxes', 'arianna_add_gallery_image_meta_post');
-
-// Mostra il contenuto del meta box
-function arianna_show_image_orientation_metabox($post) {
-    // Recupera il valore salvato
-    $valore = get_post_meta($post->ID, '_image_orientation', true);
-    
-    // Nonce per sicurezza
-    wp_nonce_field('save_image_orientation', 'image_orientation_nonce');
-    
-    ?>
-    <label for="image_orientation">Seleziona orientamento:</label>
-    <select name="image_orientation" id="image_orientation" style="width: 100%; margin-top: 10px;">
-        <option value="landscape" <?php selected($valore, 'landscape'); ?>>Orizzontale</option>
-        <option value="portrait" <?php selected($valore, 'portrait'); ?>>Verticale</option>
-    </select>
-    <?php
-}
-
-// Salva il valore quando si salva il post
-function arianna_save_gallery_image_post($post_id) {
-    // Verifica nonce
-    if (!isset($_POST['image_orientation_nonce']) || !wp_verify_nonce($_POST['image_orientation_nonce'], 'save_image_orientation')) {
-        return;
-    }
-    
-    // Verifica autosave
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-        return;
-    }
-    
-    // Verifica permessi
-    if (!current_user_can('edit_post', $post_id)) {
-        return;
-    }
-    
-    // Salva il valore
-    if (isset($_POST['image_orientation'])) {
-        update_post_meta($post_id, '_image_orientation', sanitize_text_field($_POST['image_orientation']));
-    }
-}
-add_action('save_post', 'arianna_save_gallery_image_post');
-
-
 // Aggiungi il meta box
 function arianna_add_member_role_metabox() {
     add_meta_box(
@@ -349,138 +239,6 @@ function arianna_enable_svg_upload($mimes) {
 add_filter('upload_mimes', 'arianna_enable_svg_upload');
 
 
-function arianna_add_menu_download_page() {
-    add_menu_page(
-        'Log Download',
-        'Log Download',
-        'manage_options',
-        'downloads',
-        'arianna_downloads_page',
-        'dashicons-download',
-        30
-    );
-}
-add_action('admin_menu', 'arianna_add_menu_download_page');
-
-function arianna_downloads_page() {
-    global $wpdb;
-    $table_name = $wpdb->prefix . 'downloads_log';
-    $results = $wpdb->get_results("SELECT * FROM $table_name ORDER BY date DESC");
-    
-    ?>
-    <div class="wrap">
-        <h1>Log Download</h1>
-        <p>
-            <a href="<?php echo admin_url('admin.php?page=downloads&esporta_csv=1'); ?>" 
-               class="button button-primary">
-                <span class="dashicons dashicons-download" style="margin-top: 3px;"></span> 
-                Esporta in CSV
-            </a>
-        </p>
-        <table class="wp-list-table widefat fixed striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Email</th>
-                    <th>File</th>
-                    <th>Data Download</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php if ($results) : ?>
-                    <?php foreach ($results as $row) : ?>
-                        <tr>
-                            <td>#<?php echo $row->id; ?></td>
-                            <td><a href="mailto:<?php echo esc_html($row->email); ?>"><?php echo esc_html($row->email); ?></a></td>
-                            <td><?php echo esc_html($row->file_name); ?></td>
-                            <td><?php echo $row->date; ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                <?php else : ?>
-                    <tr><td colspan="4">Nessun download registrato</td></tr>
-                <?php endif; ?>
-            </tbody>
-        </table>
-    </div>
-    <?php
-}
-
-function arianna_manage_download_form() {
-    if (isset($_POST['download_email']) && isset($_POST['file_id'])) {
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'download_emails';
-        
-        $email = sanitize_email($_POST['download_email']);
-        $file_id = sanitize_text_field($_POST['file_id']);
-        
-        if (is_email($email)) {
-            // Salva nel database
-            $wpdb->insert(
-                $table_name,
-                array(
-                    'email' => $email,
-                    'file_name' => $file_id
-                )
-            );
-            
-            // Avvia il download
-            $file_path = get_attached_file($file_id);
-            
-            if (file_exists($file_path)) {
-                header('Content-Type: application/octet-stream');
-                header('Content-Disposition: attachment; filename="' . basename($file_path) . '"');
-                header('Content-Length: ' . filesize($file_path));
-                readfile($file_path);
-                exit;
-            }
-        }
-    }
-}
-add_action('init', 'arianna_manage_download_form');
-
-function arianna_export_downloads_log_csv() {
-    // Verifica che sia la pagina giusta e che l'utente abbia i permessi
-    if (isset($_GET['esporta_csv']) && current_user_can('manage_options')) {
-        global $wpdb;
-        $table_name = $wpdb->prefix . 'downloads_log';
-        $results = $wpdb->get_results("SELECT * FROM $table_name ORDER BY date DESC", ARRAY_A);
-        
-        // Imposta gli header per il download
-        header('Content-Type: text/csv; charset=utf-8');
-        header('Content-Disposition: attachment; filename=download-emails-' . date('Y-m-d') . '.csv');
-        
-        // Crea l'output
-        $output = fopen('php://output', 'w');
-        
-        // Aggiungi BOM per Excel (per caratteri accentati)
-        fprintf($output, chr(0xEF).chr(0xBB).chr(0xBF));
-        
-        // Intestazioni colonne
-        fputcsv($output, array('ID', 'Email', 'File', 'Data Download'), ';');
-        
-        // Dati
-        if ($results) {
-            foreach ($results as $row) {
-                fputcsv($output, array(
-                    $row['id'],
-                    $row['email'],
-                    $row['file_name'],
-                    $row['date']
-                ), ';');
-            }
-        }
-        
-        fclose($output);
-        exit;
-    }
-}
-add_action('admin_init', 'arianna_export_downloads_log_csv');
-
-// 
-function arianna_get_login_url_with_redirect() {
-    global $wp;
-    return ARIANNA_LOGIN_URL . '?redirect_to=' . urlencode(home_url($wp->request));
-}
 
 foreach (glob(get_template_directory() . '/inc/*.php') as $file) {
     require_once $file;

@@ -1,0 +1,378 @@
+.hero {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    align-items: start;
+}
+
+.heroImage {
+    width: 50%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #4A90E2 0%, #7AB8FF 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--bordi);
+    position: relative;
+    overflow: hidden;
+}
+
+.heroImage::after {
+    content: '';
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.heroIcon {
+    font-size: 150px;
+    z-index: 1;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+}
+
+.heroInfo {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.componentHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.titleRow {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.componentType {
+    padding: 6px 12px;
+    font-size: 13px;
+    border: 1px solid var(--bordi);
+    background-color: var(--grigetto);
+    white-space: nowrap;
+}
+
+.componentType.meccanica {
+    border-color: #4A90E2;
+    background-color: rgba(74, 144, 226, 0.1);
+    color: #4A90E2;
+}
+
+.componentType.hardware {
+    border-color: #E24A4A;
+    background-color: rgba(226, 74, 74, 0.1);
+    color: #E24A4A;
+}
+
+.componentType.software {
+    border-color: #4AE290;
+    background-color: rgba(74, 226, 144, 0.1);
+    color: #4AE290;
+}
+
+.versionTag {
+    display: inline-block;
+    padding: 4px 10px;
+    background-color: var(--grigetto);
+    border: 1px solid var(--bordi);
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 20px;
+    background-color: var(--riquadri);
+    border: 1px solid var(--bordi);
+}
+
+.statItem {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.statLabel {
+    font-size: 12px;
+    color: var(--bordi);
+}
+
+.statValue {
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--accent);
+}
+
+.actionButtons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.secondaryBtn {
+    background-color: transparent;
+    border: 1px solid var(--bordi);
+    color: var(--testo);
+}
+
+.secondaryBtn:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+}
+
+.tabsSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.tabButtons {
+    display: flex;
+    gap: 0;
+    border-bottom: 2px solid var(--bordi);
+}
+
+.tabBtn {
+    padding: 15px 30px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--bordi);
+    font-size: 15px;
+    cursor: none;
+    transition: all 0.3s ease;
+    margin-bottom: -2px;
+}
+
+.tabBtn:hover {
+    color: var(--testo);
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.tabBtn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+    background-color: transparent;
+}
+
+.tabContent {
+    display: none;
+    padding: 40px;
+    background-color: var(--riquadri);
+    border: 1px solid var(--bordi);
+    border-top: none;
+    min-height: 400px;
+}
+
+.tabContent.active {
+    display: block;
+}
+
+.documentationContent {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.docSection {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.specTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.specTable tr {
+    border-bottom: 1px solid var(--bordi);
+}
+
+.specTable td {
+    padding: 12px 0;
+    font-size: 15px;
+}
+
+.specTable td:first-child {
+    color: var(--bordi);
+    width: 40%;
+}
+
+.filesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.fileCard {
+    background-color: var(--grigetto);
+    border: 1px solid var(--bordi);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.fileCard:hover {
+    border-color: var(--accent);
+}
+
+.fileIcon {
+    font-size: 40px;
+    color: var(--accent);
+}
+
+.fileInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.fileName {
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.fileSize {
+    font-size: 13px;
+    color: var(--bordi);
+}
+
+.commentsList {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.comment {
+    background-color: var(--grigetto);
+    border: 1px solid var(--bordi);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.commentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.commentAuthor {
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.commentDate {
+    font-size: 13px;
+    color: var(--bordi);
+}
+
+.commentForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    background-color: var(--grigetto);
+    border: 1px solid var(--bordi);
+}
+
+.commentInput {
+    padding: 15px;
+    border: 1px solid var(--bordi);
+    background-color: var(--riquadri);
+    font-family: 'Roboto Mono', sans-serif;
+    font-size: 15px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+.commentInput:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+@media screen and (max-width: 1200px) {
+    body {
+        cursor: auto;
+    }
+
+    .cursorDot {
+        display: none;
+    }
+
+    h1 {
+        font-size: 60px;
+    }
+
+    h2 {
+        font-size: 40px;
+    }
+
+    .hero {
+        flex-direction: column;
+    }
+
+    .heroImage,
+    .heroInfo {
+        width: 100%;
+    }
+
+    .menu .links {
+        display: none;
+    }
+
+    .tornaIndietro {
+        display: none;
+    }
+
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tabBtn {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .statsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .filesGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .tabButtons {
+        overflow-x: auto;
+    }
+
+    .tabBtn {
+        white-space: nowrap;
+    }
+
+    .tabContent {
+        padding: 20px;
+    }
+}

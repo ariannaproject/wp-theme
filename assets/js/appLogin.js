@@ -1,4 +1,4 @@
-const BACKOFFICE_URL = 'http://localhost:8000/';
+const BACKOFFICE_URL = 'https://app.arianna.michieletto.it/';
 var userData = null;
 
 async function fetchUserData() {

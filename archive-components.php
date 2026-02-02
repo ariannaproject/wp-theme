@@ -18,7 +18,7 @@
                     Tutti i componenti disponibili per costruire la tua linea di montaggio personalizzata.
                     Puoi cercare, filtrare e scaricare singolarmente ogni elemento.
                     <br><br>
-                    Preferisci una soluzione pronta? Scopri i nostri <a href="<?= get_post_type_archive_link('kit') ?>" style="color: var(--accent);"><b>kit preconfigurati</b></a>.
+                    Preferisci una soluzione pronta? Scopri i nostri <a href="<?= get_post_type_archive_link('kits') ?>" style="color: var(--accent);"><b>kit preconfigurati</b></a>.
                 </p>
             </div>
         </header>
