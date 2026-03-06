@@ -1,0 +1,1 @@
+initFilters('news-grid', null, 'news-filter-buttons');

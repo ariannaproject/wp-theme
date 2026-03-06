@@ -1,0 +1,202 @@
+.home-header {
+    position: relative;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    height: calc(100vh - 65px);
+}
+
+.title-container {
+    padding: 10px;
+    width: 50%;
+    container-type: inline-size;
+}
+
+.title-container h1 {
+    font-size: 98cqi;
+    margin-bottom: 0px;
+}
+
+.subtitle-container {
+    padding: 0 20px;
+    margin-top: 30px;
+    position: relative;
+    width: 25%;
+    display: flex;
+}
+
+.subtitle-container p {
+    margin: 0;
+    font-size: 1.3rem;
+}
+
+.scrolldown-container {
+    position: absolute;
+    bottom: 0vh;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 0;
+}
+
+.scrolldown-line {
+    width: 3px;
+    height: 100%;
+    background: var(--borders-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.scrolldown-line::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    animation: scrolldown-anim 1.5s linear infinite;
+}
+
+.font-credit {
+    position: absolute;
+    bottom: 5px;
+    margin-left: 10px;
+}
+
+@keyframes scrolldown-anim {
+    from {
+        top: -100%;
+    }
+
+    to {
+        top: 100%;
+    }
+}
+
+@media screen and (max-width: 1200px) and (min-width: 769px) {
+    .subtitle-container {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 768px)  {
+    .home-header {
+        flex-direction: column;
+        height: auto;
+    }
+
+    /* Continuous features carousel */
+    .features-carousel {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .features-carousel-track {
+        display: flex;
+        gap: 1.5rem;
+        align-items: stretch;
+        will-change: transform;
+        flex-wrap: nowrap;
+    }
+
+    .features-carousel .card {
+        flex: 0 0 auto;
+        vertical-align: top;
+    }
+
+    /* Optional: reduce gap on small screens */
+    @media screen and (max-width: 768px)  {
+        .features-carousel-track { gap: 1rem; }
+    }
+
+    /* Provide a safe default for cards inside transparent backgrounds */
+    .features-carousel .card-img-placeholder {
+        min-height: 140px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .title-container {
+        width: 100%;
+        text-align: center;
+    }
+
+    .subtitle-container {
+        margin-top: 0px;
+        height: 40vh;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .scrolldown-container {
+        display: none;
+    }
+}
+
+/* Continuous features carousel (global) */
+.features-carousel {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.features-carousel-track {
+    display: flex;
+    gap: 1.5rem;
+    align-items: stretch;
+    will-change: transform;
+    flex-wrap: nowrap;
+}
+
+.features-carousel .card {
+    flex: 0 0 auto;
+    vertical-align: top;
+}
+
+@media screen and (max-width: 768px)  {
+    .features-carousel-track { gap: 1rem; }
+    .features-carousel .card-img-placeholder { min-height: 140px; display: flex; align-items: center; justify-content: center; }
+}
+
+.home-description {
+    column-count: 2;
+    column-gap: 50%;
+    column-fill: auto;
+    height: 85vh;
+}
+
+.model-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vh;
+    height: 100vh;
+    z-index: -1;
+}
+
+@media screen and (max-width: 768px)  {
+    .home-description {
+        column-count: 1;
+        column-gap: 0;
+        height: auto;
+    }
+
+    .model-container {
+        display: none;
+    }
+}
+
+.card-img-container {
+    aspect-ratio: 10 / 7;
+    border-bottom: 1px solid var(--borders-color);
+}
+
+.card-img {
+    object-fit: revert;
+    padding: 20px;
+}

@@ -1,0 +1,1 @@
+initFilters('components-grid', 'components-search-text', 'components-filter-buttons');

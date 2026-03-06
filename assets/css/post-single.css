@@ -1,0 +1,17 @@
+.post-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.btn-share {
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    display: flex;
+    background-color: white;
+}
+
+.btn-share svg {
+    margin: auto;
+}

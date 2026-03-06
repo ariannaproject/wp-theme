@@ -1,0 +1,1 @@
+initFilters('components-grid', null, 'components-filter-buttons');
