@@ -86,8 +86,12 @@ foreach($files as $file) {
 
         <div class="tab-buttons">
             <button class="tab-button active" onclick="switchTab('documentation')">Documentazione</button>
+            <?php if(count($files) > 0) : ?>
             <button class="tab-button" onclick="switchTab('files')">File</button>
+            <?php endif; ?>
+            <?php if(count(arianna_kit_components_get_kits(get_the_ID())) > 0) : ?>
             <button class="tab-button" onclick="switchTab('kits')">Kit</button>
+            <?php endif; ?>
             <?php if(comments_open()) : ?>
             <button class="tab-button" onclick="switchTab('comments')">Commenti</button>
             <?php endif; ?>
