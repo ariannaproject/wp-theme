@@ -34,7 +34,7 @@
 
     <div class="card-grid mt-5" id="news-grid">
         <?php 
-        foreach(get_posts(['post_type' => 'post']) as $post) : 
+        foreach(get_posts(['post_type' => 'post', 'posts_per_page' => -1]) as $post) : 
             $categories = get_the_category($post->ID);
             $category_slug = $categories[0]->slug ?? 'senza-categoria';
         ?>
