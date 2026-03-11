@@ -122,7 +122,7 @@ foreach($files as $file) {
                         <div class="card-text text-small"><?= $file['count'] ?> downloads</div>
                         <div class="card-text text-small"><?= $file_size ?></div>
                         <div>
-                            <a class="btn btn-primary" href="<?= home_url() ?>/?component_id=99&file_id=<?= $file['file_id'] ?>">
+                            <a class="btn btn-primary" href="<?= home_url() ?>/?component_id=<?= get_the_ID() ?>&file_id=<?= $file['file_id'] ?>">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 5px;">
                                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"></path>
                                 </svg>
