@@ -23,9 +23,8 @@ function arianna_notify_admins( $post_id, $post, $update ) {
 
     if ( empty( $emails ) ) return;
 
-    // Get author name
-    $author = get_user_by( 'id', $post->post_author );
-    $author_name = $author ? $author->display_name : 'Utente sconosciuto';
+    // Get user info
+    $user = wp_get_current_user();
 
     // Prepare email
     $action       = $update ? 'modificato' : 'creato';
@@ -36,7 +35,7 @@ function arianna_notify_admins( $post_id, $post, $update ) {
     $subject = "[Arianna] - {$action} {$post_title}";
 
     $body = "Ciao,<br><br>";
-    $body .= "L'utente \"{$author_name}\" ha {$action} un post.<br><br>";
+    $body .= "L'utente \"{$user->display_name}\" ha {$action} un post.<br><br>";
     $body .= "Titolo: {$post_title}<br>";
     $body .= "Visualizza: <a href=\"{$post_link}\">{$post_link}</a><br>";
     $body .= "Modifica: <a href=\"{$edit_link}\">{$edit_link}</a><br><br>";
