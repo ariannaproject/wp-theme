@@ -29,8 +29,8 @@
 
             <div class="d-flex gap-3">
                 <a href="<?= get_permalink(get_page_by_path('download')) ?>" class="btn btn-primary">Scarica il progetto</a>
-                <?php if(current_user_can('administrator')) : ?>
-                    <a href="<?= admin_url() ?>">Admin</a>
+                <?php if(is_user_logged_in() && !current_user_can('subscriber')) : ?>
+                    <a href="<?= admin_url() ?>">Amministrazione</a>
                 <?php elseif(is_user_logged_in()): ?>
                     <a href="<?= wp_logout_url() ?>">Logout</a>
                 <?php else: ?>
