@@ -81,7 +81,7 @@ $components = get_posts([
                     </div>
                     <div class="spec-row">
                         <span>Download:</span>
-                        <span>245</span>
+                        <span><?= arianna_components_get_download_count($component->ID) ?></span>
                     </div>
                 </div>
                 <a class="btn btn-primary-outline" href="<?= get_permalink($component->ID) ?>">

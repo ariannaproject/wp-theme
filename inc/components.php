@@ -219,3 +219,12 @@ function arianna_components_download_attachment() {
     }
 }
 add_action('template_redirect', 'arianna_components_download_attachment');
+
+function arianna_components_get_download_count($component_id) {
+    $downloads = 0;
+    $files = get_post_meta($component_id, '_attachments', true);
+    foreach ($files as $file) {
+        $downloads += intval($file['count']);
+    }
+    return $downloads;
+}
