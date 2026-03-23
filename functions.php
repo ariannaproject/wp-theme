@@ -70,14 +70,18 @@ add_action('wp_enqueue_scripts', 'arianna_register_scripts');
 // =========== CUSTOM MENU ===========
 
 function arianna_create_custom_menu() {
+    // Add separator
+    global $menu;
+    $menu[39] = ['', 'read', '', '', 'wp-menu-separator'];
+
     add_menu_page(
-        'Contenuti Arianna',
-        'Contenuti Arianna',
+        'Altro Arianna',
+        'Altro Arianna',
         'edit_posts',
         'arianna-contents',
         '',
-        'dashicons-rest-api',
-        50
+        'dashicons-portfolio',
+        51
     );
 }
 add_action('admin_menu', 'arianna_create_custom_menu');

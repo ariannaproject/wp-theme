@@ -17,7 +17,8 @@ function arianna_kits_post_type()
         'menu_icon' => 'dashicons-archive',
         'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
         'show_in_rest' => true,
-        'show_in_menu' => 'arianna-contents',
+        'show_in_menu' => true,
+        'menu_position' => 41,
         'rewrite' => ['slug' => 'kits'],
         'rest_base' => 'kits',
     ]);
