@@ -376,7 +376,7 @@ a:not(.btn):hover {
 .item-header-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .item-header-text {
@@ -495,7 +495,7 @@ a:not(.btn):hover {
 }
 
 .card-img {
-    object-fit: cover;
+    object-fit: contain;
     overflow: hidden;
     transition: transform 0.3s ease;
     height: 100%;
