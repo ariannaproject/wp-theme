@@ -35,7 +35,7 @@ $components = get_posts([
                 <div class="d-flex gap-3" style="flex-wrap: wrap;" id="components-filter-buttons">
                     <button class="btn btn-select active" data-category="all">Tutti (<span id="countAll"><?= count(get_posts(['post_type' => 'component'])) ?></span>)</button>
                     <?php foreach (get_terms('component_category') as $term) : ?>
-                        <button class="btn btn-select" data-category="<?= $term->slug ?>"><?= $term->name ?> (<span><?= count(get_posts(['post_type' => 'component', 'tax_query' => ['taxonomy' => 'component_category', 'field' => 'slug', 'terms' => $term->slug]])) ?></span>)</button>
+                        <button class="btn btn-select" data-category="<?= $term->slug ?>"><?= $term->name ?> (<span><?= count(get_posts(['post_type' => 'component', 'tax_query' => [['taxonomy' => 'component_category', 'field' => 'slug', 'terms' => $term->slug]]])) ?></span>)</button>
                     <?php endforeach; ?>
                 </div>
                 
